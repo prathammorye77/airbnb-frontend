@@ -7,6 +7,7 @@ import { loginSchema } from "../validation/loginSchema";
 import FormInput from "../components/FormInput";
 import { useAuth } from "../context/AuthContext";
 import { GoogleLogin } from "@react-oauth/google";
+const API = import.meta.env.VITE_API_URL;
 
 function Login() {
   const navigate = useNavigate();
@@ -25,7 +26,7 @@ function Login() {
     const toastId = toast.loading("Logging in...");
 
     try {
-      const res = await axios.post("/login", data);
+      const res = await axios.post(`${API}/login`, data);
 
       login(res.data.user, res.data.token); //  store token
 
@@ -87,7 +88,7 @@ function Login() {
         onSuccess={async (credentialResponse) => {
            console.log(credentialResponse);
           try {
-            const res = await axios.post("/auth/google", {
+            const res = await axios.post(`${API}/auth/google`, {
               token: credentialResponse.credential,
             });
 

@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import axios from "../utils/axiosInstance";
 import ListingCard from "../components/ListingCard";
 import { useAuth } from "../context/AuthContext";
+const API = import.meta.env.VITE_API_URL;
 
 function Listings() {
   const [listings, setListings] = useState([]);
@@ -11,7 +12,7 @@ function Listings() {
   useEffect(() => {
     
     axios
-      .get("http://localhost:8080/listings")
+      .get(`${API}/listings`)
       .then((res) => setListings(res.data))
       .catch((err) => {
         console.log(err)
