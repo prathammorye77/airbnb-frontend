@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { listingSchema } from "../validation/listingSchema";
 import FormInput from "../components/FormInput";
-const API = import.meta.env.VITE_API_URL;
+
 
 function EditListing() {
   const { id } = useParams();
@@ -56,7 +56,7 @@ function EditListing() {
         formData.append("image", data.image[0]);
       }
 
-      await axios.put(`${API}/listings/${id}`, formData, {
+      await axios.put(`/listings/${id}`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

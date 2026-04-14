@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { signupSchema } from "../validation/signupSchema";
 import FormInput from "../components/FormInput";
 import { useAuth } from "../context/AuthContext";
-const API = import.meta.env.VITE_API_URL;
+
 
 function Signup() {
   const navigate = useNavigate();
@@ -26,7 +26,7 @@ function Signup() {
     try {
       const { confirmPassword, ...cleanData } = data;
 
-      const res = await axios.post(`${API}/register`, cleanData);
+      const res = await axios.post(`/register`, cleanData);
 
       login(res.data.user, res.data.token);
 

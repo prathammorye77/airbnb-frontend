@@ -2,17 +2,17 @@ import { useEffect, useState } from "react";
 
 import axios from "../utils/axiosInstance";
 import ListingCard from "../components/ListingCard";
-import { useAuth } from "../context/AuthContext";
-const API = import.meta.env.VITE_API_URL;
+
+
 
 function Listings() {
   const [listings, setListings] = useState([]);
-  const {fav} = useAuth();
+  
 
   useEffect(() => {
     
     axios
-      .get(`${API}/listings`)
+      .get(`/listings`)
       .then((res) => setListings(res.data))
       .catch((err) => {
         console.log(err)

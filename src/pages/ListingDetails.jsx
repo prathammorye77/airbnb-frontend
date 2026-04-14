@@ -10,11 +10,11 @@ function ListingDetails() {
   const navigate = useNavigate();
   const [listing, setListing] = useState(null);
   const { user } = useAuth();
-const API = import.meta.env.VITE_API_URL;
+
 
   useEffect(() => {
     axios
-      .get(`${API}/listings/${id}`)
+      .get(`/listings/${id}`)
       .then((res) => {
         setListing(res.data);
       })
@@ -32,7 +32,7 @@ const API = import.meta.env.VITE_API_URL;
   function handleDelete() {
     const toastId = toast.loading("Deleting...");
     axios
-      .delete(`${API}/listings/${id}`)
+      .delete(`/listings/${id}`)
       .then((res) => {
         toast.update(toastId, {
           render: res.data.message,
