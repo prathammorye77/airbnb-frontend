@@ -38,5 +38,5 @@ npm run dev
 
 ## 👨‍💻 Author
 
-Rohit Morye
+Pratham Morye
 
