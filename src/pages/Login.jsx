@@ -6,8 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema } from "../validation/loginSchema";
 import FormInput from "../components/FormInput";
 import { useAuth } from "../context/AuthContext";
-import { GoogleLogin } from "@react-oauth/google";
-
+import GoogleButton from "../components/GoogleButton";
 
 function Login() {
   const navigate = useNavigate();
@@ -51,14 +50,16 @@ function Login() {
   };
 
   return (
-    <>
-      <div className="container mt-5" style={{ maxWidth: "500px" }}>
-        <h2 className="mb-4 text-center">Login</h2>
+    <div className="container d-flex justify-content-center align-items-center min-vh-100 px-3">
+      <div className="w-100" style={{ maxWidth: "420px" }}>
+        {/* Title */}
+        <h2 className="text-center mb-4 fw-bold">Login</h2>
 
+        {/* Card */}
         <form
           onSubmit={handleSubmit(onSubmit)}
           noValidate
-          className="card p-4 shadow"
+          className="card p-4 shadow-sm border-0 rounded-4"
         >
           {/* EMAIL */}
           <FormInput
@@ -78,33 +79,18 @@ function Login() {
           />
 
           {/* BUTTON */}
-          <button disabled={isSubmitting} className="btn btn-primary w-100">
+          <button disabled={isSubmitting} className="btn btn-dark w-100 mt-3">
             {isSubmitting ? "Logging in..." : "Login"}
           </button>
         </form>
-        &nbsp;
 
-        <GoogleLogin
-        onSuccess={async (credentialResponse) => {
-           console.log(credentialResponse);
-          try {
-            const res = await axios.post(`/auth/google`, {
-              token: credentialResponse.credential,
-            });
+        {/* Divider */}
+        <div className="text-center my-3 text-muted">OR</div>
 
-            login(res.data.user, res.data.token);
-            navigate("/");
-          } catch (err) {
-            console.log(err);
-          }
-        }}
-        onError={() => {
-          console.log("Login Failed");
-        }}
-      />
+        {/* Google Login */}
+        <GoogleButton />
       </div>
-      
-    </>
+    </div>
   );
 }
 

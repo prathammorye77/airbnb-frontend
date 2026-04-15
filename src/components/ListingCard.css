@@ -1,0 +1,17 @@
+.hover-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+/* .hover-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+} */
+
+.hover-card:hover {
+  transform: translateY(-0.5px) scale(1.03);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(5, 5, 5, 0.4);
+}

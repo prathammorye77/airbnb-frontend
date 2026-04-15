@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { signupSchema } from "../validation/signupSchema";
 import FormInput from "../components/FormInput";
 import { useAuth } from "../context/AuthContext";
-
+import GoogleButton from "../components/GoogleButton";
 
 function Signup() {
   const navigate = useNavigate();
@@ -53,45 +53,60 @@ function Signup() {
   };
 
   return (
-    <div className="container mt-5" style={{ maxWidth: "500px" }}>
-      <h2 className="mb-4 text-center">Signup</h2>
+    <div className="container d-flex justify-content-center align-items-center min-vh-100 px-3">
+      <div className="w-100" style={{ maxWidth: "420px" }}>
+        <h2 className="text-center mb-4 fw-bold">Create Account</h2>
 
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        noValidate
-        className="card p-4 shadow"
-      >
-        {/* EMAIL */}
-        <FormInput
-          label="Email"
-          name="email"
-          register={register}
-          error={errors.email}
-        />
+        {/* FORM */}
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          noValidate
+          className="card p-4 shadow-sm border-0 rounded-4"
+        >
+          <FormInput
+            label="Email"
+            name="email"
+            register={register}
+            error={errors.email}
+          />
 
-        {/* PASSWORD */}
-        <FormInput
-          label="Password"
-          name="password"
-          type="password"
-          register={register}
-          error={errors.password}
-        />
+          <FormInput
+            label="Password"
+            name="password"
+            type="password"
+            register={register}
+            error={errors.password}
+          />
 
-        {/* CONFIRM PASSWORD */}
-        <FormInput
-          label="Confirm Password"
-          name="confirmPassword"
-          type="password"
-          register={register}
-          error={errors.confirmPassword}
-        />
+          <FormInput
+            label="Confirm Password"
+            name="confirmPassword"
+            type="password"
+            register={register}
+            error={errors.confirmPassword}
+          />
 
-        {/* BUTTON */}
-        <button disabled={isSubmitting} className="btn btn-success w-100">
-          {isSubmitting ? "Creating..." : "Signup"}
-        </button>
-      </form>
+          <button
+            disabled={isSubmitting}
+            className="btn btn-success w-100 mt-3"
+          >
+            {isSubmitting ? "Creating..." : "Signup"}
+          </button>
+        </form>
+
+        {/* Divider */}
+        <div className="text-center my-3 text-muted">OR</div>
+
+        {/* GOOGLE LOGIN */}
+       <GoogleButton />
+        {/* Footer */}
+        <p className="text-center mt-3 small">
+          Already have an account?{" "}
+          <a href="/login" className="fw-semibold text-decoration-none">
+            Login
+          </a>
+        </p>
+      </div>
     </div>
   );
 }

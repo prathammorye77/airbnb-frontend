@@ -10,10 +10,12 @@ import { ToastContainer } from "react-toastify";
 import ProtectedRoute from "./components/ProtectedRoute";
 import "react-toastify/dist/ReactToastify.css";
 import Favorites from "./pages/Favorites";
+import { AuthProvider } from "./context/AuthContext";
 
 function App() {
   return (
     <BrowserRouter>
+    <AuthProvider>
       <Navbar />
       <ToastContainer position="top-right" autoClose={3000} pauseOnHover />
       <Routes>
@@ -41,6 +43,7 @@ function App() {
         />
         
       </Routes>
+      </AuthProvider>
     </BrowserRouter>
   );
 }

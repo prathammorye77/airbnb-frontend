@@ -1,29 +1,36 @@
 import { createContext, useContext, useState } from "react";
-
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
-  const [fav, setfav] = useState(null);
+  const navigate = useNavigate();
 
-  const userFav = (favL) => {
-    setfav(favL)
-  }
-
-  // 🔥 LOGIN
+ 
   const login = (userData, token) => {
     localStorage.setItem("token", token);
     localStorage.setItem("user", JSON.stringify(userData));
-    setUser(userData); // 🔥 triggers useEffect above
+    setUser(userData);
   };
 
-  // 🔥 LOGOUT
   const logout = () => {
+    const toastId = toast.loading("Logging out...");
+
     localStorage.removeItem("token");
     localStorage.removeItem("user");
+
     setUser(null);
-    // 🔥 clear favorites
+
+    toast.update(toastId, {
+      render: "Logout successful ✅",
+      type: "success",
+      isLoading: false,
+      autoClose: 1000,
+    });
+
+    navigate("/");
   };
 
   return (
@@ -32,8 +39,6 @@ export function AuthProvider({ children }) {
         user,
         login,
         logout,
-        userFav,
-        fav,
       }}
     >
       {children}
@@ -41,7 +46,6 @@ export function AuthProvider({ children }) {
   );
 }
 
-// 🔥 Custom hook
 export function useAuth() {
   return useContext(AuthContext);
 }

@@ -11,7 +11,6 @@ function ListingDetails() {
   const [listing, setListing] = useState(null);
   const { user } = useAuth();
 
-
   useEffect(() => {
     axios
       .get(`/listings/${id}`)
@@ -55,41 +54,63 @@ function ListingDetails() {
   }
 
   return (
-    <div className="container mt-4">
-      <div className="card shadow">
+    <div className="container py-4 px-3 px-md-5">
+      <div className="card border-0 shadow-sm rounded-4 overflow-hidden">
+        {/* Image */}
         <img
           src={listing.image?.url}
-          className="card-img-top"
           alt={listing.title}
-          style={{ height: "400px", objectFit: "cover" }}
+          className="w-100"
+          style={{
+            height: "300px",
+            objectFit: "cover",
+          }}
         />
 
+        {/* Content */}
         <div className="card-body">
-          <h3>{listing.title}</h3>
+          {/* Title */}
+          <h2 className="fw-bold mb-2">{listing.title}</h2>
 
-          <p>{listing.description}</p>
-
-          <h5>₹ {listing.price.toLocaleString("en-IN")} / night</h5>
-
-          <p className="text-muted">
-            {listing.location}, {listing.country}
+          {/* Location */}
+          <p className="text-muted mb-3">
+            📍 {listing.location}, {listing.country}
           </p>
+
+          {/* Price */}
+          <h4 className="fw-semibold mb-3">
+            ₹ {listing.price.toLocaleString("en-IN")}{" "}
+            <span className="text-muted fs-6">/ night</span>
+          </h4>
+
+          {/* Divider */}
+          <hr />
+
+          {/* Description */}
+          <p className="mt-3" style={{ lineHeight: "1.6" }}>
+            {listing.description}
+          </p>
+
+          {/* Buttons */}
+          {user && isOwner && (
+            <div className="d-flex flex-column flex-md-row gap-2 mt-4">
+              <Link
+                to={`/listings/${listing._id}/edit`}
+                className="btn btn-dark w-100 w-md-auto"
+              >
+                ✏️ Edit
+              </Link>
+
+              <button
+                className="btn btn-danger w-100 w-md-auto"
+                onClick={handleDelete}
+              >
+                🗑 Delete
+              </button>
+            </div>
+          )}
         </div>
       </div>
-
-      {user && isOwner && (
-        <>
-          <Link
-            to={`/listings/${listing._id}/edit`}
-            className="btn btn-primary mt-3"
-          >
-            Edit Details
-          </Link>
-          <button className="btn btn-danger mt-3 ms-2" onClick={handleDelete}>
-            Delete
-          </button>
-        </>
-      )}
     </div>
   );
 }

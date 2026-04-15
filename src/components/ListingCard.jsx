@@ -1,36 +1,46 @@
 import { Link } from "react-router-dom";
 import FavoriteButton from "./FavoriteButton";
-function ListingCard({listing, flag}) {
+import "./ListingCard.css";
+
+function ListingCard({ listing, flag }) {
   return (
-    <div className="col-md-4 mt-5">
-      <div className="card h-100 shadow" >
+    <div className="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
+      <div className="card h-100 hover-card border-0">
+        {/* Image */}
         <img
           src={listing.image?.url}
-          className="card-img-top h-50"
+          className="card-img-top"
           alt={listing.title}
-          style={{objectFit: "cover" }}
+          style={{
+            height: "200px",
+            objectFit: "cover",
+            borderTopLeftRadius: "16px",
+            borderTopRightRadius: "16px",
+          }}
         />
 
-        <div className="card-body">
-          <h5 className="card-title">{listing.title}</h5>
+        {/* Body */}
+        <div className="card-body d-flex flex-column">
+          <h5 className="card-title fw-bold text-truncate">{listing.title}</h5>
 
-          <p className="card-text">
+          <p className="card-text text-muted small">
             {listing.description.substring(0, 80)}...
           </p>
 
-          <p className="fw-bold">
+          <p className="fw-semibold mb-1">
             ₹ {listing.price.toLocaleString("en-IN")} / night
           </p>
 
-          <p className="text-muted">
+          <p className="text-muted small mb-2">
             {listing.location}, {listing.country}
           </p>
-          
-          <FavoriteButton listingId={listing._id} isFavInitial={flag}/>
 
+          <div className="mb-2">
+            <FavoriteButton listingId={listing._id} isFavInitial={flag} />
+          </div>
           <Link
+            className="btn btn-dark w-100 mt-auto"
             to={`/listings/${listing._id}`}
-            className="btn btn-primary"
           >
             View Details
           </Link>
