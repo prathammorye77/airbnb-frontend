@@ -10,7 +10,6 @@ function Listings() {
   
 
   useEffect(() => {
-    
     axios
       .get(`/listings`)
       .then((res) => setListings(res.data))

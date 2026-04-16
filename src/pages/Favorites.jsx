@@ -1,16 +1,7 @@
-import { useEffect, useState } from "react";
-import axios from "../utils/axiosInstance";
+import { useFavorites } from "../context/FavoritesContext";
 import ListingCard from "../components/ListingCard";
-
-
 function Favorites() {
-  const [favorites, setFavorites] = useState([]);
-
-  useEffect(() => {
-    axios.get(`/favorites`).then((res) => {
-      setFavorites(res.data);
-    });
-  }, [favorites]);
+   const { favorites } = useFavorites();
 
   return (
     <div className="container mt-5">
@@ -18,7 +9,7 @@ function Favorites() {
 
       <div className="row">
         {favorites.map((listing) => (
-          <ListingCard key={listing._id} listing={listing} flag={true}/>
+          <ListingCard key={listing._id} listing={listing} />
         ))}
       </div>
     </div>

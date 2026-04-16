@@ -2,10 +2,10 @@ import { Link } from "react-router-dom";
 import FavoriteButton from "./FavoriteButton";
 import "./ListingCard.css";
 
-function ListingCard({ listing, flag }) {
+function ListingCard({ listing }) {
   return (
     <div className="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
-      <div className="card h-100 hover-card border-0">
+      <div className="card h-100 hover-card ">
         {/* Image */}
         <img
           src={listing.image?.url}
@@ -36,7 +36,7 @@ function ListingCard({ listing, flag }) {
           </p>
 
           <div className="mb-2">
-            <FavoriteButton listingId={listing._id} isFavInitial={flag} />
+            <FavoriteButton listingId={listing._id} />
           </div>
           <Link
             className="btn btn-dark w-100 mt-auto"
