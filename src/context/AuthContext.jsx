@@ -2,11 +2,15 @@ import { createContext, useContext, useState } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
+
+
 const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
+
+
 
   const login = (userData, token) => {
     localStorage.setItem("token", token);
@@ -21,6 +25,7 @@ export function AuthProvider({ children }) {
     localStorage.removeItem("user");
 
     setUser(null);
+    
 
     toast.update(toastId, {
       render: "Logout successful ✅",
